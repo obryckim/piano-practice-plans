@@ -1,6 +1,6 @@
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace AzureTestConsole.Factories
+namespace PracticePlans.Common.Azure.Storage.Factories
 {
     public class CloudTableClientFactory : ICloudTableClientFactory
     {

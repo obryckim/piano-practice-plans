@@ -1,6 +1,6 @@
 using Microsoft.WindowsAzure.Storage;
 
-namespace AzureTestConsole.Factories
+namespace PracticePlans.Common.Azure.Storage.Factories
 {
     public interface ICloudStorageAccountFactory
     {

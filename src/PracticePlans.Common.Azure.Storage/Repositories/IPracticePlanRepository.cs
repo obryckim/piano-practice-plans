@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using AzureTestConsole.Models;
+using PracticePlans.Common.Azure.Storage.Models;
 
-namespace AzureTestConsole.Repositories
+namespace PracticePlans.Common.Azure.Storage.Repositories
 {
     public interface IPracticePlanRepository
     {

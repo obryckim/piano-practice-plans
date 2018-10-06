@@ -1,6 +1,6 @@
 using System;
 
-namespace AzureTestConsole.Models
+namespace PracticePlans.Common.Azure.Storage.Models
 {
     public class PracticePlanDto : IPracticePlan
     {

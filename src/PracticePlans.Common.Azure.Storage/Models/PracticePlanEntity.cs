@@ -1,7 +1,7 @@
 using System;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace AzureTestConsole.Models
+namespace PracticePlans.Common.Azure.Storage.Models
 {
     public class PracticePlanEntity : TableEntity, IPracticePlan
     {

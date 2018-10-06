@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace AzureTestConsole.Factories
+namespace PracticePlans.Common.Azure.Storage.Factories
 {
     public interface ICloudTableFactory
     {

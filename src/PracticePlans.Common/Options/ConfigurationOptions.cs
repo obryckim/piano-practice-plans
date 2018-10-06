@@ -1,4 +1,4 @@
-namespace AzureTestConsole.Options
+namespace PracticePlans.Common.Options
 {
     public class ConfigurationOptions
     {

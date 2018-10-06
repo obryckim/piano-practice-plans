@@ -1,9 +1,9 @@
 using System;
-using AzureTestConsole.Options;
 using Microsoft.Extensions.Options;
 using Microsoft.WindowsAzure.Storage;
+using PracticePlans.Common.Options;
 
-namespace AzureTestConsole.Factories
+namespace PracticePlans.Common.Azure.Storage.Factories
 {
     public class CloudStorageAccountFactory : ICloudStorageAccountFactory
     {

@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using AzureTestConsole.Factories;
-using AzureTestConsole.Models;
 using Microsoft.WindowsAzure.Storage.Table;
+using PracticePlans.Common.Azure.Storage.Factories;
+using PracticePlans.Common.Azure.Storage.Models;
 
-namespace AzureTestConsole.Repositories
+namespace PracticePlans.Common.Azure.Storage.Repositories
 {
     public class PracticePlanRepository : IPracticePlanRepository
     {
