@@ -1,16 +1,16 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using AzureTestConsole.Factories;
-using AzureTestConsole.Models;
-using AzureTestConsole.Options;
-using AzureTestConsole.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
+using PracticePlans.Common.Azure.Storage.Factories;
+using PracticePlans.Common.Azure.Storage.Models;
+using PracticePlans.Common.Azure.Storage.Repositories;
+using PracticePlans.Common.Options;
 using Serilog;
 using ILogger = Serilog.ILogger;
 

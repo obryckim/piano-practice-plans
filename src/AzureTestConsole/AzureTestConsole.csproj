@@ -40,4 +40,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PracticePlans.Common.Azure.Storage\PracticePlans.Common.Azure.Storage.csproj" />
+    <ProjectReference Include="..\PracticePlans.Common\PracticePlans.Common.csproj" />
+  </ItemGroup>
+
 </Project>
