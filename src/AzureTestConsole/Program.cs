@@ -85,7 +85,8 @@ namespace AzureTestConsole
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", false);
+                .AddJsonFile("appsettings.json", false)
+                .AddUserSecrets<Program>();
 
             configuration = builder.Build();
 
