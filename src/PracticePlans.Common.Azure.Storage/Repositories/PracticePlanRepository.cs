@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -30,6 +31,21 @@ namespace PracticePlans.Common.Azure.Storage.Repositories
                 tableOperation = TableOperation.Delete((ITableEntity)result.Result);
                 await cloudTable.ExecuteAsync(tableOperation);
             }
+        }
+
+        public async Task<IEnumerable<IPracticePlan>> GetAllAsync()
+        {
+            var cloudTable = await this.cloudTableFactory.CreateAsync(PracticePlanTableName);
+            var query = new TableQuery<PracticePlanEntity>();
+            var continuationToken = new TableContinuationToken();
+            var querySegment = await cloudTable.ExecuteQuerySegmentedAsync(query, continuationToken);
+
+            var result = querySegment.Results
+                .Select(practicePlanEntity => new PracticePlanDto(practicePlanEntity))
+                .OrderByDescending(o => o.StartDate)
+                .ToList();
+
+            return result;
         }
 
         public async Task<IPracticePlan> GetAsync(DateTime startDate)
