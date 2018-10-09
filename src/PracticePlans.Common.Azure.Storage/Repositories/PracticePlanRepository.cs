@@ -65,7 +65,7 @@ namespace PracticePlans.Common.Azure.Storage.Repositories
             return result;
         }
 
-        public async Task UpsertAsync(IPracticePlan practicePlan)
+        public async Task<IPracticePlan> UpsertAsync(IPracticePlan practicePlan)
         {
             var entity = new PracticePlanEntity
             {
@@ -76,8 +76,9 @@ namespace PracticePlans.Common.Azure.Storage.Repositories
 
             var cloudTable = await this.cloudTableFactory.CreateAsync(PracticePlanTableName);
             var tableOperation = TableOperation.InsertOrMerge(entity);
+            var result = await cloudTable.ExecuteAsync(tableOperation);
 
-            await cloudTable.ExecuteAsync(tableOperation);
+            return new PracticePlanDto((PracticePlanEntity)result.Result);
         }
     }
 }

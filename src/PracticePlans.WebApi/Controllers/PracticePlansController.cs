@@ -20,18 +20,11 @@ namespace PracticePlans.WebApi.Controllers
             this.practicePlanRepository = practicePlanRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<IPracticePlan>>> GetAsync()
-        {
-            var practicePlans = await this.practicePlanRepository.GetAllAsync();
-            return this.Ok(practicePlans);
-        }
-
-        [HttpGet]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
+        [HttpDelete]
         [Route("{startDate:DateTime}")]
-        public async Task<ActionResult<IPracticePlan>> Get(DateTime startDate)
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult> DeleteAsync(DateTime startDate)
         {
             var practicePlan = await this.practicePlanRepository.GetAsync(startDate);
 
@@ -40,7 +33,70 @@ namespace PracticePlans.WebApi.Controllers
                 return this.NotFound();
             }
 
-            return this.Ok(practicePlan);
+            await this.practicePlanRepository.DeleteAsync(practicePlan);
+
+            return this.NoContent();
+        }
+
+        [HttpGet]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<IEnumerable<IPracticePlan>>> GetAsync()
+        {
+            var practicePlans = await this.practicePlanRepository.GetAllAsync();
+            return practicePlans.ToList();
+        }
+
+        [HttpGet]
+        [Route("{startDate:DateTime}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<IPracticePlan>> GetAsync(DateTime startDate)
+        {
+            var practicePlan = await this.practicePlanRepository.GetAsync(startDate);
+
+            if (practicePlan == null)
+            {
+                return this.NotFound();
+            }
+
+            return (PracticePlanDto)practicePlan;
+        }
+
+        [HttpPost]
+        [Consumes("application/json")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<IPracticePlan>> PostAsync(PracticePlanDto practicePlan)
+        {
+            var newPracticePlan = await this.practicePlanRepository.UpsertAsync(practicePlan);
+
+            return this.CreatedAtAction(
+                nameof(this.GetAsync),
+                new { startDate = newPracticePlan.StartDate },
+                newPracticePlan);
+        }
+
+        [HttpPut]
+        [Route("{startDate:DateTime}")]
+        [Consumes("application/json")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult> PutAsync(DateTime startDate, PracticePlanDto practicePlan)
+        {
+            var practicePlanToUpdate = await this.practicePlanRepository.GetAsync(startDate);
+
+            if (practicePlanToUpdate == null)
+            {
+                return this.NotFound();
+            }
+
+            //// TODO:: update the properies here
+            //// practicePlanToUpdate.StartDate = practicePlan.StartDate;
+
+            await this.practicePlanRepository.UpsertAsync(practicePlanToUpdate);
+
+            return this.NoContent();
         }
     }
 }

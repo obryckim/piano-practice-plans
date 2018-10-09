@@ -13,6 +13,6 @@ namespace PracticePlans.Common.Azure.Storage.Repositories
 
         Task<IPracticePlan> GetAsync(DateTime startDate);
 
-        Task UpsertAsync(IPracticePlan practicePlan);
+        Task<IPracticePlan> UpsertAsync(IPracticePlan practicePlan);
     }
 }
