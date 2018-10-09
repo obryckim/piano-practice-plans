@@ -4,10 +4,23 @@
   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
   "version": "0.2.0",
   "configurations": [{
-      "name": ".NET Core Launch (console)",
+      "name": ".NET Core Launch Practice Plans Web API",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "build",
+      "preLaunchTask": "build practice plans web api",
+      "program": "${workspaceRoot}/src/PracticePlans.WebApi/bin/Debug/netcoreapp2.1/PracticePlans.WebApi.dll",
+      "args": [],
+      "cwd": "${workspaceRoot}/src/PracticePlans.WebApi",
+      "stopAtEntry": false,
+      "launchBrowser": {
+        "enabled": false
+      }
+    },
+    {
+      "name": ".NET Core Launch Azure Test Console",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build azure test console",
       // If you have changed target frameworks, make sure to update the program path.
       "program": "${workspaceFolder}/src/AzureTestConsole/bin/Debug/netcoreapp2.1/AzureTestConsole.dll",
       "args": [],

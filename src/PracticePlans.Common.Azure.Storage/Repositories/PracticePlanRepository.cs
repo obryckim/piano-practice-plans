@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -32,6 +33,21 @@ namespace PracticePlans.Common.Azure.Storage.Repositories
             }
         }
 
+        public async Task<IEnumerable<IPracticePlan>> GetAllAsync()
+        {
+            var cloudTable = await this.cloudTableFactory.CreateAsync(PracticePlanTableName);
+            var query = new TableQuery<PracticePlanEntity>();
+            var continuationToken = new TableContinuationToken();
+            var querySegment = await cloudTable.ExecuteQuerySegmentedAsync(query, continuationToken);
+
+            var result = querySegment.Results
+                .Select(practicePlanEntity => new PracticePlanDto(practicePlanEntity))
+                .OrderByDescending(o => o.StartDate)
+                .ToList();
+
+            return result;
+        }
+
         public async Task<IPracticePlan> GetAsync(DateTime startDate)
         {
             var cloudTable = await this.cloudTableFactory.CreateAsync(PracticePlanTableName);
@@ -49,7 +65,7 @@ namespace PracticePlans.Common.Azure.Storage.Repositories
             return result;
         }
 
-        public async Task UpsertAsync(IPracticePlan practicePlan)
+        public async Task<IPracticePlan> UpsertAsync(IPracticePlan practicePlan)
         {
             var entity = new PracticePlanEntity
             {
@@ -60,8 +76,9 @@ namespace PracticePlans.Common.Azure.Storage.Repositories
 
             var cloudTable = await this.cloudTableFactory.CreateAsync(PracticePlanTableName);
             var tableOperation = TableOperation.InsertOrMerge(entity);
+            var result = await cloudTable.ExecuteAsync(tableOperation);
 
-            await cloudTable.ExecuteAsync(tableOperation);
+            return new PracticePlanDto((PracticePlanEntity)result.Result);
         }
     }
 }

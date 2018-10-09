@@ -1,13 +1,24 @@
 {
   "version": "2.0.0",
   "tasks": [{
-    "label": "build",
-    "command": "dotnet",
-    "type": "process",
-    "args": [
-      "build",
-      "${workspaceFolder}/src/AzureTestConsole/AzureTestConsole.csproj"
-    ],
-    "problemMatcher": "$msCompile"
-  }]
+      "label": "build practice plans web api",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/PracticePlans.WebApi/PracticePlans.WebApi.csproj"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build azure test console",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/src/AzureTestConsole/AzureTestConsole.csproj"
+      ],
+      "problemMatcher": "$msCompile"
+    }
+  ]
 }
