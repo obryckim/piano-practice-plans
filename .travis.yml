@@ -3,4 +3,4 @@
     - language: node_js
       node_js: "10"
       before_install:
-        - cd $TRAVIS_BUILD_DIR\src\PracticePlans.FrontEnd\
+        - cd $TRAVIS_BUILD_DIR/src/PracticePlans.FrontEnd/
