@@ -8,7 +8,8 @@ export default {
         contentBase: './src'
     },
     target: 'web',
-    entry: './src/index',
+    context: __dirname,
+    entry: './src/index.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
@@ -23,7 +24,7 @@ export default {
     ],
     module: {
         rules: [{
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 include: [path.join(__dirname, 'src')],
                 use: ['babel-loader']
             },
