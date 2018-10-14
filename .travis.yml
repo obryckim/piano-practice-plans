@@ -3,4 +3,4 @@
     - language: node_js
       node_js: "10"
       before_script:
-        - cd practiceplans.frontend
+        - cd src\PracticePlans.FrontEnd\
