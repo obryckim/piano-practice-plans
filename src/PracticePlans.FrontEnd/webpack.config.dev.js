@@ -24,6 +24,18 @@ export default {
     ],
     module: {
         rules: [{
+                enforce: 'pre',
+                test: /\.(js|jsx)$/,
+                include: [
+                    path.join(__dirname, 'src'),
+                    path.join(__dirname, 'tools')
+                ],
+                loader: 'eslint-loader',
+                options: {
+                    emitWarning: true
+                }
+            },
+            {
                 test: /\.(js|jsx)$/,
                 include: [path.join(__dirname, 'src')],
                 use: ['babel-loader']
