@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "lint": "esw --format simple-detail webpack.config.* src tools",
+    "lint": "esw --format simple-detail webpack.config.* \"src/**/*.jsx\" tools",
     "lint:watch": "npm run lint -s -- --watch",
     "test": "mocha --reporter spec tools/testSetup.js \"src/**/*.test.js\" \"src/**/*.test.jsx\"",
     "test:watch": "npm run test -- --watch --watch-extensions js,jsx",
