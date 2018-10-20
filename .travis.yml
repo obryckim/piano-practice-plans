@@ -4,12 +4,10 @@
       node_js: "10"
       before_install:
         - cd $TRAVIS_BUILD_DIR/src/PracticePlans.FrontEnd/
-    - language: chsarp
+    - language: csharp
       mono: none
-      dotnet: 2.1.401
-      before_install:
-        - cd $TRAVIS_BUILD_DIR/src/PracticePlans.WebApi/
+      dotnet: 2.1.402
       script:
-        - dotnet restore
-        - dotnet build
+        - dotnet restore src/PracticePlans.WebApi/PracticePlans.WebApi.csproj
+        - dotnet build src/PracticePlans.WebApi/PracticePlans.WebApi.csproj
 
