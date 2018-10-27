@@ -5,7 +5,7 @@ import moment from 'moment';
 const PracticePlanListRow = ({ practicePlan }) => {
     return (
         <tr>
-            <td>{moment(practicePlan.startDate).format("YYYY/MM/DD")}</td>
+            <td>{moment(practicePlan.startDate).format('YYYY/MM/DD')}</td>
         </tr>
     );
 };

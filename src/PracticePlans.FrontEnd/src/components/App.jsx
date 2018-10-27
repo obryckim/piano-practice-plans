@@ -1,6 +1,5 @@
 ﻿import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
 import PracticePlansPage from './practice plans/PracticePlansPage.jsx';
 
 class App extends React.Component {
@@ -17,8 +16,4 @@ class App extends React.Component {
     }
 }
 
-function mapStateToProps(/*state, ownProps*/) {
-	return {};
-}
-
-export default connect(mapStateToProps)(App);
+export default App;
