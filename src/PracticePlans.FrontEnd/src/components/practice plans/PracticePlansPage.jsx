@@ -1,9 +1,9 @@
 ﻿import React from 'react';
-// import { bindActionCreators } from 'redux';
-// import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import * as courseActions from '../../actions/courseActions';
-// import CourseList from './CourseList';
+import PracticePlanList from './PracticePlanList.jsx';
+import * as practicePlanActions from '../../actions/practicePlanActions';
 
 // this is a container component
 // the 5 major pieces of a container component
@@ -25,32 +25,35 @@ class PracticePlansPage extends React.Component {
 
     // 3) render method... usually calls a child component
     // markup is usually kept separate from the container component
-    render(){
-        // const { practicePlans } = this.props;
+    render() {
+        const { practicePlans } = this.props;
 
         return (
             <div>
                 <h1>Practice Plans</h1>
+                <PracticePlanList practicePlans={practicePlans} />
             </div>
         );
     }
 }
 
 // 4) prop types and prop type validation
-// PracticePlansPage.propTypes = {}
+PracticePlansPage.propTypes = {
+    practicePlans: PropTypes.array.isRequired
+};
 
 // 5) redux "connect" and related functions
 // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-function mapStateToProps(/*state, ownProps*/) {
-	return {
-		// courses: state.courses
-	};
+function mapStateToProps(state/*, ownProps*/) {
+    return {
+        practicePlans: state.practicePlans
+    };
 }
 
-function mapDispatchToProps(/*dispatch*/) {
-	return {
-		// actions: bindActionCreators(courseActions, dispatch)
-	};
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(practicePlanActions, dispatch)
+    };
 }
 
 // these 2 lines of code:
