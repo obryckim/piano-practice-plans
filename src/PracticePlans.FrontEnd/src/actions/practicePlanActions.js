@@ -2,14 +2,7 @@
 //import courseApi from '../api/mockCourseApi';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
-export function loadPracticePlansSuccess(practicePlans) {
-    return {
-        type: types.LOAD_PRACTICEPLANS_SUCCESS,
-        practicePlans
-    };
-}
-
-export function loadPracticePlans() {
+function fetchPracticePlans() {
     return function (dispatch) {
         dispatch(beginAjaxCall());
 
@@ -31,15 +24,29 @@ export function loadPracticePlans() {
     };
 }
 
-// export function loadCourses() {
-// 	return function (dispatch) {
-// 		dispatch(beginAjaxCall());
+function shouldFetchPracticePlans(state) {
+    const practicePlans = state.practicePlans;
 
-// 		return courseApi.getAllCourses().then(courses => {
-// 			dispatch(loadCoursesSuccess(courses));
-// 		}).catch(error => {
-// 			dispatch(ajaxCallError());
-// 			throw (error);
-// 		});
-// 	};
-// }
+    if (!practicePlans) {
+        return true;
+    } else if (!practicePlans.length) {
+        return true;
+    }
+
+    return false;
+}
+
+export function loadPracticePlansSuccess(practicePlans) {
+    return {
+        type: types.LOAD_PRACTICEPLANS_SUCCESS,
+        practicePlans
+    };
+}
+
+export function fetchPracticePlansIfNeeded() {
+    return (dispatch, getState) => {
+        if (shouldFetchPracticePlans(getState())) {
+            return dispatch(fetchPracticePlans());
+        }
+    };
+}

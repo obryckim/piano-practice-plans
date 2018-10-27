@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
+import PracticePlanListRow from './PracticePlanListRow.jsx';
 
 const PracticePlanList = ({ practicePlans }) => {
     return (
@@ -10,7 +11,7 @@ const PracticePlanList = ({ practicePlans }) => {
                 </tr>
             </thead>
             <tbody>
-                {practicePlans.map(practicePlan => <tr key={practicePlan.startDate}><td>{practicePlan.startDate}</td></tr>)}
+                {practicePlans.map(practicePlan => <PracticePlanListRow key={practicePlan.startDate} practicePlan={practicePlan} />)}
             </tbody>
         </table>
     );
