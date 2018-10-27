@@ -4,6 +4,6 @@ namespace PracticePlans.Common.Options
 {
     public class WebApiOptions
     {
-        public ICollection<CorsPolicyOptions> CorsPolicies { get; set; }
+        public CorsPolicyOptions CorsPolicy { get; set; }
     }
 }

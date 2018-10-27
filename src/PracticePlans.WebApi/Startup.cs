@@ -78,14 +78,18 @@ namespace PracticePlans.WebApi
             app.UseStaticFiles();
 
             // cors
-            app.UseCors();
+            app.UseCors(this.options.WebApi.CorsPolicy.PolicyName);
 
             //// TODO:: enable authentication
             //// authentication
             //// app.UseAuthentication();
 
             // mvc
-            app.UseHttpsRedirection();
+            if (!env.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
+
             app.UseMvc();
         }
 
@@ -114,18 +118,20 @@ namespace PracticePlans.WebApi
 
         private void ConfigureCorsOptions(CorsOptions options)
         {
-            var corsPolicies = this.options.WebApi?.CorsPolicies ?? new List<CorsPolicyOptions>();
+            var corsPolicy = this.options.WebApi?.CorsPolicy;
 
-            foreach (var corsPolicy in corsPolicies)
+            if (corsPolicy == null)
             {
-                options.AddPolicy(
-                    corsPolicy.PolicyName,
-                    builder => builder
-                        .SetIsOriginAllowedToAllowWildcardSubdomains()
-                        .WithOrigins(corsPolicy.AllowedOrigins)
-                        .AllowAnyHeader()
-                        .AllowAnyMethod());
+                return;
             }
+
+            options.AddPolicy(
+                corsPolicy.PolicyName,
+                builder => builder
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                    .WithOrigins(corsPolicy.AllowedOrigins)
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
         }
 
         //// TODO:: configure authentication options

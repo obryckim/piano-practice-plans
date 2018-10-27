@@ -14,11 +14,11 @@ function setup() {
 }
 
 describe('<App />', () => {
-    it('renders h1', () => {
+    it('renders div', () => {
         const wrapper = setup();
-        let h1 = wrapper.find('h1');
-        expect(h1.length).toBe(1);
-        expect(h1.text()).toEqual('This is the app...');
+        let div = wrapper.find('div');
+        expect(div.length).toBe(1);
+        expect(div.hasClass('container-fluid')).toBe(true);
     });
 });
 
