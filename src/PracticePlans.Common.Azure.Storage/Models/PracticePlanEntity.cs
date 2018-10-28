@@ -7,6 +7,8 @@ namespace PracticePlans.Common.Azure.Storage.Models
     {
         public DateTime StartDate { get; set; }
 
+        public string Details { get; set; }
+
         public static string GetRowKey(IPracticePlan plan) =>
             $"{plan.StartDate.Date.ToString("yyyy.MM.dd")}";
 
