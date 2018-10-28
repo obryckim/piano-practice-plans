@@ -5,15 +5,16 @@ import { connect } from 'react-redux';
 import PracticePlanList from './PracticePlanList.jsx';
 import * as practicePlanActions from '../../actions/practicePlanActions';
 
+// Container component
+// ES6 Class Component
 class PracticePlansPage extends React.Component {
 
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
     }
 
     componentDidMount() {
-        const { dispatch } = this.props;
-        dispatch(practicePlanActions.fetchPracticePlansIfNeeded());
+        this.props.actions.loadPracticePlans();
     }
 
     render() {
@@ -21,7 +22,7 @@ class PracticePlansPage extends React.Component {
 
         return (
             <div>
-                <h1>Practice Plans</h1>
+                <h1>Benjamin&apos;s Piano Practice Plans</h1>
                 <PracticePlanList practicePlans={practicePlans} />
             </div>
         );
@@ -30,7 +31,7 @@ class PracticePlansPage extends React.Component {
 
 PracticePlansPage.propTypes = {
     practicePlans: PropTypes.array.isRequired,
-    dispatch: PropTypes.func.isRequired
+    actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -41,8 +42,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(practicePlanActions, dispatch),
-        dispatch
+        actions: bindActionCreators(practicePlanActions, dispatch)
     };
 }
 
