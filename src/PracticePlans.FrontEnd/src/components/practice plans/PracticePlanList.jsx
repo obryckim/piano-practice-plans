@@ -2,6 +2,8 @@
 import PropTypes from 'prop-types';
 import PracticePlanListRow from './PracticePlanListRow.jsx';
 
+// This is just a presentational component
+// ES6 Stateless Functional Component
 const PracticePlanList = ({ practicePlans }) => {
     return (
         <table className='table'>
