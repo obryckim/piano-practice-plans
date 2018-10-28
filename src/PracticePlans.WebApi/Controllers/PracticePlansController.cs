@@ -91,8 +91,7 @@ namespace PracticePlans.WebApi.Controllers
                 return this.NotFound();
             }
 
-            //// TODO:: update the properies here
-            //// practicePlanToUpdate.StartDate = practicePlan.StartDate;
+            practicePlanToUpdate.Details = practicePlan.Details;
 
             await this.practicePlanRepository.UpsertAsync(practicePlanToUpdate);
 

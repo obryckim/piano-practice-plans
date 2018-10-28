@@ -70,6 +70,7 @@ namespace PracticePlans.Common.Azure.Storage.Repositories
             var entity = new PracticePlanEntity
             {
                 StartDate = practicePlan.StartDate.ToUniversalTime(),
+                Details = practicePlan.Details,
                 PartitionKey = PracticePlanEntity.GetPartitionKey(),
                 RowKey = PracticePlanEntity.GetRowKey(practicePlan)
             };
