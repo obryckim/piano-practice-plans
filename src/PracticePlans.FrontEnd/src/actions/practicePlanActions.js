@@ -1,5 +1,5 @@
 ﻿import * as types from './actionTypes';
-//import courseApi from '../api/mockCourseApi';
+import practicePlanApi from '../api/practicePlanApi';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
 export function loadPracticePlansSuccess(practicePlans) {
@@ -9,21 +9,49 @@ export function loadPracticePlansSuccess(practicePlans) {
     };
 }
 
+export function createPracticePlanSuccess(practicePlan) {
+	return { type: types.CREATE_PRACTICEPLAN_SUCCESS, practicePlan };
+}
+
+export function updatePracticePlanSuccess(practicePlan) {
+	return { type: types.UPDATE_PRACTICEPLAN_SUCCESS, practicePlan };
+}
+
 export function loadPracticePlans() {
     return dispatch => {
         dispatch(beginAjaxCall());
 
-        // TODO:: create/use practicePlansApi class
-
-        return fetch('http://localhost:5000/api/PracticePlans/')
-            .then(response => response.json().then(body => ({ response, body })))
+        return practicePlanApi.getAllPracticePlans()
             .then(({ response, body }) => {
                 if (!response.ok) {
-                  dispatch(ajaxCallError());
+                    dispatch(ajaxCallError());
+                    throw (response.statusText);
                 } else {
-                  dispatch(loadPracticePlansSuccess(body));
+                    dispatch(loadPracticePlansSuccess(body));
                 }
-              })
+            })
+            .catch(error => {
+                dispatch(ajaxCallError());
+                throw (error);
+            });
+    };
+}
+
+export function savePracticePlan(practicePlan) {
+    return dispatch => {
+        dispatch(beginAjaxCall());
+
+        return practicePlanApi.savePracticePlan(practicePlan)
+            .then(({response, savedPracticePlan}) => {
+                if (!response.ok) {
+                    dispatch(ajaxCallError());
+                    throw (response.statusText);
+                } else {
+                    practicePlan.startDate ?
+                        dispatch(updatePracticePlanSuccess(savedPracticePlan)) :
+                        dispatch(createPracticePlanSuccess(savedPracticePlan));
+                }
+            })
             .catch(error => {
                 dispatch(ajaxCallError());
                 throw (error);

@@ -2,6 +2,7 @@
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 import PracticePlanList from './PracticePlanList.jsx';
 import * as practicePlanActions from '../../actions/practicePlanActions';
 
@@ -11,10 +12,20 @@ class PracticePlansPage extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.redirectToAddPracticePlanPage = this.redirectToAddPracticePlanPage.bind(this);
     }
 
     componentDidMount() {
-        this.props.actions.loadPracticePlans();
+        this.props.actions.loadPracticePlans()
+            .catch((error) => {
+                const errorMessage = `An error occurred loading the practice plans: ${error.message || error}`;
+                toast.error(errorMessage);
+            });
+    }
+
+    redirectToAddPracticePlanPage() {
+        this.props.history.push('/practicePlan');
     }
 
     render() {
@@ -24,12 +35,14 @@ class PracticePlansPage extends React.Component {
             <div>
                 <h1>Benjamin&apos;s Piano Practice Plans</h1>
                 <PracticePlanList practicePlans={practicePlans} />
+                <input type='submit' value='Add Practice Plan' className='btn btn-primary' onClick={this.redirectToAddPracticePlanPage} />
             </div>
         );
     }
 }
 
 PracticePlansPage.propTypes = {
+    history: PropTypes.object,
     practicePlans: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 };
