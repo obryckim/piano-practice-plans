@@ -10,10 +10,11 @@ const PracticePlanList = ({ practicePlans }) => {
             <thead>
                 <tr>
                     <th>Start Date</th>
+                    <th>Details</th>
                 </tr>
             </thead>
             <tbody>
-                {practicePlans.map(practicePlan => <PracticePlanListRow key={practicePlan.startDate} practicePlan={practicePlan} />)}
+                {practicePlans.map(pp => <PracticePlanListRow key={pp.startDate} practicePlan={pp} />)}
             </tbody>
         </table>
     );

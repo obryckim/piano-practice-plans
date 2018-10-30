@@ -6,6 +6,7 @@ const PracticePlanListRow = ({ practicePlan }) => {
     return (
         <tr>
             <td>{moment(practicePlan.startDate).format('YYYY/MM/DD')}</td>
+            <td>{practicePlan.details}</td>
         </tr>
     );
 };
