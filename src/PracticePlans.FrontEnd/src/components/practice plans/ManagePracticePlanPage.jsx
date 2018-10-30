@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
+import marked from 'marked';
 import PracticePlanForm from './PracticePlanForm.jsx';
 import * as practicePlanActions from '../../actions/practicePlanActions';
 
@@ -13,12 +14,15 @@ class ManagePracticePlanPage extends React.Component {
         // mutable state for this component
         this.state = {
             practicePlan: Object.assign({}, props.practicePlan),
+            markdownPreview: { __html: '<h1>NO PREVIEW</h1>' },
             errors: {},
             saving: false
         };
 
         this.updatePracticePlanState = this.updatePracticePlanState.bind(this);
         this.savePracticePlan = this.savePracticePlan.bind(this);
+        this.cancelChanges = this.cancelChanges.bind(this);
+        this.generateMarkdownPreview = this.generateMarkdownPreview.bind(this);
     }
 
     updatePracticePlanState(event) {
@@ -38,20 +42,27 @@ class ManagePracticePlanPage extends React.Component {
         this.setState({ saving: true });
 
         this.props.actions
-			.savePracticePlan(this.state.practicePlan)
-			.then(() => this.redirect())
-			.catch(error => {
+            .savePracticePlan(this.state.practicePlan)
+            .then(() => this.redirectAfterSave())
+            .catch(error => {
                 let errorMessage = `An error occurred saving the practice plan: ${error.message || error}`;
-				toast.error(errorMessage);
-				this.setState({ saving: false });
-			});
+                toast.error(errorMessage);
+                this.setState({ saving: false });
+            });
     }
 
-    redirect() {
-		this.setState({ saving: false });
-		toast.success('Practice plan saved!');
-		this.props.history.push('/');
-	}
+    cancelChanges(event) {
+        event.preventDefault();
+        this.setState({ saving: false });
+        toast.info('Changes cancelled.', { autoClose: 2000 });
+        this.props.history.push('/');
+    }
+
+    redirectAfterSave() {
+        this.setState({ saving: false });
+        toast.success('Practice plan saved!');
+        this.props.history.push('/');
+    }
 
     practicePlanFormIsValid() {
         let formIsValid = true;
@@ -71,14 +82,25 @@ class ManagePracticePlanPage extends React.Component {
         return formIsValid;
     }
 
+    generateMarkdownPreview(event) {
+        let rawMarkup = marked(event.target.value);
+        let markdownPreview = Object.assign({}, this.state.markdownPreview);
+        /* eslint-disable no-underscore-dangle */
+        markdownPreview.__html = rawMarkup;
+        return this.setState({ markdownPreview: markdownPreview });
+    }
+
     render() {
         return (
             <PracticePlanForm
                 onChange={this.updatePracticePlanState}
                 onSave={this.savePracticePlan}
+                onCancel={this.cancelChanges}
+                onMarkdownUpdate={this.generateMarkdownPreview}
                 errors={this.state.errors}
                 saving={this.state.saving}
-                practicePlan={this.state.practicePlan} />
+                practicePlan={this.state.practicePlan}
+                markdownPreview={this.state.markdownPreview} />
         );
     }
 }
