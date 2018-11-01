@@ -7,10 +7,14 @@ class PracticePlanApi {
             .then(response => response.json().then(body => ({ response, body })));
     }
 
+    static getPracticePlan(practicePlanId) {
+        return fetch(`${api.PRACTICE_PLANS_ENDPOINT}${practicePlanId}`)
+            .then(response => response.json().then(body => ({ response, body })));
+    }
+
     static savePracticePlan(practicePlan) {
         return fetch(api.PRACTICE_PLANS_ENDPOINT, {
                 method: 'POST',
-                // mode: 'cors'
                 cache: 'no-cache',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8'

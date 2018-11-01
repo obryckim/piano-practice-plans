@@ -16,6 +16,8 @@ namespace PracticePlans.Common.Azure.Storage.Models
 
         public DateTime StartDate { get; set; }
 
+        public string StartDateString => this.StartDate.ToString("yyyy-MM-dd");
+
         public string Details { get; set; }
     }
 }

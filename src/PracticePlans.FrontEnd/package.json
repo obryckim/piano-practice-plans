@@ -11,7 +11,7 @@
     "test": "mocha --reporter spec tools/testSetup.js \"src/**/*.test.js\" \"src/**/*.test.jsx\"",
     "test:watch": "npm run test -- --watch --watch-extensions js,jsx",
     "prestart": "babel-node tools/startMessage.js",
-    "start": "npm-run-all --parallel open:src lint:watch",
+    "start": "npm-run-all --parallel open:src lint:watch test:watch",
     "open:src": "babel-node tools/srcServer.js"
   },
   "repository": {

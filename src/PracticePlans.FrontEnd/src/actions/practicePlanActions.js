@@ -2,6 +2,13 @@
 import practicePlanApi from '../api/practicePlanApi';
 import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
+export function loadPracticePlanSuccess(practicePlan) {
+    return {
+        type: types.LOAD_PRACTICEPLAN_SUCCESS,
+        practicePlan
+    };
+}
+
 export function loadPracticePlansSuccess(practicePlans) {
     return {
         type: types.LOAD_PRACTICEPLANS_SUCCESS,
@@ -15,6 +22,17 @@ export function createPracticePlanSuccess(practicePlan) {
 
 export function updatePracticePlanSuccess(practicePlan) {
 	return { type: types.UPDATE_PRACTICEPLAN_SUCCESS, practicePlan };
+}
+
+export function loadPracticePlanIfNeeded(practicePlanId) {
+    return (dispatch, getState) => {
+
+        if (shouldfetchPracticePlan(getState(), practicePlanId)) {
+            return dispatch(fetchPracticePlans(practicePlanId));
+        } else {
+            return Promise.resolve();
+        }
+    };
 }
 
 export function loadPracticePlans() {
@@ -50,6 +68,33 @@ export function savePracticePlan(practicePlan) {
                     practicePlan.startDate ?
                         dispatch(updatePracticePlanSuccess(savedPracticePlan)) :
                         dispatch(createPracticePlanSuccess(savedPracticePlan));
+                }
+            })
+            .catch(error => {
+                dispatch(ajaxCallError());
+                throw (error);
+            });
+    };
+}
+
+function shouldfetchPracticePlan(state, practicePlanId) {
+    const practicePlans = state.practicePlans;
+    const practicePlan = practicePlans.filter(practicePlan => practicePlan.startDateString === practicePlanId);
+
+    return practicePlan.length ? false : true;
+}
+
+function fetchPracticePlans(practicePlanId) {
+    return dispatch => {
+        dispatch(beginAjaxCall());
+
+        return practicePlanApi.getPracticePlan(practicePlanId)
+            .then(({ response, body }) => {
+                if (!response.ok) {
+                    dispatch(ajaxCallError());
+                    throw (response.statusText);
+                } else {
+                    dispatch(loadPracticePlanSuccess(body));
                 }
             })
             .catch(error => {

@@ -14,7 +14,7 @@ const PracticePlanList = ({ practicePlans }) => {
                 </tr>
             </thead>
             <tbody>
-                {practicePlans.map(pp => <PracticePlanListRow key={pp.startDate} practicePlan={pp} />)}
+                {practicePlans.map(practicePlan => <PracticePlanListRow key={practicePlan.startDateString} practicePlan={practicePlan} />)}
             </tbody>
         </table>
     );
