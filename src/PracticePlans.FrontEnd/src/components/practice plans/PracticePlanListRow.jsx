@@ -1,11 +1,16 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 const PracticePlanListRow = ({ practicePlan }) => {
     return (
         <tr>
-            <td>{moment(practicePlan.startDate).format('YYYY/MM/DD')}</td>
+            <td>
+                <Link to={'/practicePlans/' + practicePlan.startDateString}>
+                    {moment(practicePlan.startDate).format('YYYY/MM/DD')}
+                </Link>
+            </td>
             <td>{practicePlan.details}</td>
         </tr>
     );
