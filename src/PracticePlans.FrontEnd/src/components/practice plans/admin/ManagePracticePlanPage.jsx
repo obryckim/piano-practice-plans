@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import marked from 'marked';
 import PracticePlanForm from './PracticePlanForm.jsx';
-import * as practicePlanActions from '../../actions/practicePlanActions';
+import * as practicePlanActions from '../../../actions/practicePlanActions';
 
 class ManagePracticePlanPage extends React.Component {
     constructor(props) {
@@ -55,13 +55,13 @@ class ManagePracticePlanPage extends React.Component {
         event.preventDefault();
         this.setState({ saving: false });
         toast.info('Changes cancelled.', { autoClose: 2000 });
-        this.props.history.push('/');
+        this.props.history.push('/practicePlans');
     }
 
     redirectAfterSave() {
         this.setState({ saving: false });
         toast.success('Practice plan saved!');
-        this.props.history.push('/');
+        this.props.history.push('/practicePlans');
     }
 
     practicePlanFormIsValid() {

@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
-import TextInput from '../common/TextInput.jsx';
-import TextAreaInput from '../common/TextAreaInput.jsx';
+import TextInput from '../../common/TextInput.jsx';
+import TextAreaInput from '../../common/TextAreaInput.jsx';
 
 const PracticePlanForm = ({ practicePlan, markdownPreview, onSave, onCancel, onChange, onMarkdownUpdate, saving, errors }) => {
     return (
@@ -23,7 +23,6 @@ const PracticePlanForm = ({ practicePlan, markdownPreview, onSave, onCancel, onC
                             placeholder='Enter the details of the practice plan... (markdown supported)'
                             value={practicePlan.details}
                             rows='20'
-                            //onChange={onChange}
                             onChange={(event) => { onChange(event); onMarkdownUpdate(event);}}
                             error={errors.details} />
                     </div>

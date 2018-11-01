@@ -9,11 +9,11 @@ import * as practicePlanActions from '../../actions/practicePlanActions';
 // Container component
 // ES6 Class Component
 class PracticePlansPage extends React.Component {
-
     constructor(props) {
         super(props);
 
         this.redirectToAddPracticePlanPage = this.redirectToAddPracticePlanPage.bind(this);
+        this.redirectToHomePage = this.redirectToHomePage.bind(this);
     }
 
     componentDidMount() {
@@ -25,7 +25,11 @@ class PracticePlansPage extends React.Component {
     }
 
     redirectToAddPracticePlanPage() {
-        this.props.history.push('/practicePlan');
+        this.props.history.push('/admin/practicePlan');
+    }
+
+    redirectToHomePage() {
+        this.props.history.push('/');
     }
 
     render() {
@@ -35,7 +39,10 @@ class PracticePlansPage extends React.Component {
             <div>
                 <h1>Benjamin&apos;s Piano Practice Plans</h1>
                 <PracticePlanList practicePlans={practicePlans} />
-                <input type='submit' value='Add Practice Plan' className='btn btn-primary' onClick={this.redirectToAddPracticePlanPage} />
+                <div>
+                    <input type='submit' value='Home' className='btn btn-primary' onClick={this.redirectToHomePage} />&nbsp;
+                    <input type='submit' value='Add Practice Plan' className='btn btn-default' onClick={this.redirectToAddPracticePlanPage} />
+                </div>
             </div>
         );
     }

@@ -28,7 +28,7 @@ export function loadPracticePlanIfNeeded(practicePlanId) {
     return (dispatch, getState) => {
 
         if (shouldfetchPracticePlan(getState(), practicePlanId)) {
-            return dispatch(fetchPracticePlans(practicePlanId));
+            return dispatch(fetchPracticePlan(practicePlanId));
         } else {
             return Promise.resolve();
         }
@@ -84,7 +84,7 @@ function shouldfetchPracticePlan(state, practicePlanId) {
     return practicePlan.length ? false : true;
 }
 
-function fetchPracticePlans(practicePlanId) {
+function fetchPracticePlan(practicePlanId) {
     return dispatch => {
         dispatch(beginAjaxCall());
 
