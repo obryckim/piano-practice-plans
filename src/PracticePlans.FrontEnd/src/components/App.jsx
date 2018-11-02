@@ -16,6 +16,7 @@ class App extends React.Component {
                         <Route exact path='/practicePlans' component={PracticePlansPage} />
                         <Route exact path='/practicePlans/:id' component={PracticePlanPage} />
                         <Route exact path='/admin/practicePlan' component={ManagePracticePlanPage} />
+                        <Route exact path='/admin/practicePlan/:id' component={ManagePracticePlanPage} />
                     </Switch>
                     <ToastContainer />
                 </div>
