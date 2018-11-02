@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import TextInput from '../../common/TextInput.jsx';
 import TextAreaInput from '../../common/TextAreaInput.jsx';
 
@@ -12,7 +13,9 @@ const PracticePlanForm = ({ practicePlan, markdownPreview, onSave, onCancel, onC
                     name='startDate'
                     label='Practice Plan Start Date'
                     placeholder='Enter the date this practice plan starts...'
-                    value={practicePlan.startDate}
+                    value={practicePlan.startDate && moment(practicePlan.startDate, moment.ISO_8601).isValid() ?
+                        moment(practicePlan.startDate).format('MM/DD/YYYY') :
+                        practicePlan.startDate}
                     onChange={onChange}
                     error={errors.startDate} />
                 <div className='row'>
@@ -22,12 +25,17 @@ const PracticePlanForm = ({ practicePlan, markdownPreview, onSave, onCancel, onC
                             label='Practice Plan Details'
                             placeholder='Enter the details of the practice plan... (markdown supported)'
                             value={practicePlan.details}
-                            rows='20'
-                            onChange={(event) => { onChange(event); onMarkdownUpdate(event);}}
+                            rows='30'
+                            onChange={(event) => { onChange(event); onMarkdownUpdate(event); }}
                             error={errors.details} />
                     </div>
                     <div className='col-md-6'>
-                        <div dangerouslySetInnerHTML={markdownPreview}></div>
+                        <div className='form-group'>
+                            <label>Preview</label>
+                            <div className='card'>
+                                <div className='card-body' dangerouslySetInnerHTML={markdownPreview}></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <input

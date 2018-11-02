@@ -7,6 +7,11 @@ const PracticePlanListRow = ({ practicePlan }) => {
     return (
         <tr>
             <td>
+                <Link to={'/admin/practicePlan/' + practicePlan.startDateString}>
+                    [edit]
+                </Link>
+            </td>
+            <td>
                 <Link to={'/practicePlans/' + practicePlan.startDateString}>
                     {moment(practicePlan.startDate).format('YYYY/MM/DD')}
                 </Link>

@@ -9,6 +9,7 @@ const PracticePlanList = ({ practicePlans }) => {
         <table className='table'>
             <thead>
                 <tr>
+                    <th></th>
                     <th>Start Date</th>
                     <th>Details</th>
                 </tr>
