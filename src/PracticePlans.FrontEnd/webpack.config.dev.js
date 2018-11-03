@@ -1,4 +1,5 @@
 ﻿import path from 'path';
+import Dotenv from 'dotenv-webpack';
 
 export default {
     mode: 'development',
@@ -14,7 +15,9 @@ export default {
         publicPath: '/',
         filename: 'main.js'
     },
-    plugins: [],
+    plugins: [
+        new Dotenv()
+    ],
     optimization: {
         noEmitOnErrors: true
     },
