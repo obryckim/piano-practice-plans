@@ -16,7 +16,9 @@ export default {
         filename: 'main.js'
     },
     plugins: [
-        new Dotenv()
+        new Dotenv({
+            systemvars: true
+        })
     ],
     optimization: {
         noEmitOnErrors: true

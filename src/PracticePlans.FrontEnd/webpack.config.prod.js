@@ -30,7 +30,9 @@ export default {
         new CopyWebpackPlugin([{
             from: 'public'
         }]),
-        new Dotenv()
+        new Dotenv({
+            systemvars: true
+        })
     ],
     optimization: {
         minimizer: [
