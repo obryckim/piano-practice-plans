@@ -19,7 +19,11 @@ class PracticePlanPage extends React.Component {
         const practicePlanId = this.props.practicePlanId;
 
         if (!practicePlanId) {
-            this.props.actions.loadPracticePlans();
+            this.props.actions.loadPracticePlans()
+                .catch((error) => {
+                    const errorMessage = `An error occurred loading the practice plans: ${error.message || error}`;
+                    toast.error(errorMessage);
+                });
         } else {
             this.props.actions.loadPracticePlanIfNeeded(this.props.practicePlanId)
                 .catch((error) => {
