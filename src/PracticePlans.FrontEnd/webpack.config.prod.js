@@ -4,7 +4,6 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import Dotenv from 'dotenv-webpack';
 
 export default {
     mode: 'production',
@@ -29,8 +28,7 @@ export default {
         }),
         new CopyWebpackPlugin([{
             from: 'public'
-        }]),
-        new Dotenv()
+        }])
     ],
     optimization: {
         minimizer: [
