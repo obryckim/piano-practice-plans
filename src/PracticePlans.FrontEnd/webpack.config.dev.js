@@ -1,5 +1,4 @@
-﻿import webpack from 'webpack';
-import path from 'path';
+﻿import path from 'path';
 
 export default {
     mode: 'development',
@@ -15,13 +14,10 @@ export default {
         publicPath: '/',
         filename: 'main.js'
     },
-    plugins: [
-        new webpack.LoaderOptionsPlugin({
-            debug: true,
-            noInfo: false
-        }),
-        new webpack.NoEmitOnErrorsPlugin()
-    ],
+    plugins: [],
+    optimization: {
+        noEmitOnErrors: true
+    },
     module: {
         rules: [{
                 enforce: 'pre',
