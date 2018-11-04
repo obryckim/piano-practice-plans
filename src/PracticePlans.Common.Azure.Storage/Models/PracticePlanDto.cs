@@ -10,11 +10,11 @@ namespace PracticePlans.Common.Azure.Storage.Models
 
         public PracticePlanDto(PracticePlanEntity practicePlanEntity)
         {
-            this.StartDate = practicePlanEntity.StartDate.ToLocalTime();
+            this.StartDate = practicePlanEntity.StartDate;
             this.Details = practicePlanEntity.Details;
         }
 
-        public DateTime StartDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
 
         public string StartDateString => this.StartDate.ToString("yyyy-MM-dd");
 

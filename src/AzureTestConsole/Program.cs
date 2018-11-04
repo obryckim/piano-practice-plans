@@ -39,7 +39,7 @@ namespace AzureTestConsole
                 var serviceProvider = services.BuildServiceProvider();
                 var practicePlanRepository = serviceProvider.GetService<IPracticePlanRepository>();
 
-                DateTime startDate = new DateTime(2018, 9, 25);
+                DateTimeOffset startDate = new DateTimeOffset(2018, 9, 25, 0, 0, 0, 0, new TimeSpan());
                 var practicePlan = new PracticePlanDto { StartDate = startDate };
 
                 logger.Information("Upserting practice plan with start date {startDate:yyyy-MM-dd}", practicePlan.StartDate);
