@@ -5,7 +5,7 @@ namespace PracticePlans.Common.Azure.Storage.Models
 {
     public class PracticePlanEntity : TableEntity, IPracticePlan
     {
-        public DateTime StartDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
 
         public string Details { get; set; }
 

@@ -48,7 +48,7 @@ namespace PracticePlans.Common.Azure.Storage.Repositories
             return result;
         }
 
-        public async Task<IPracticePlan> GetAsync(DateTime startDate)
+        public async Task<IPracticePlan> GetAsync(DateTimeOffset startDate)
         {
             var cloudTable = await this.cloudTableFactory.CreateAsync(PracticePlanTableName);
             var query = new TableQuery<PracticePlanEntity>
@@ -69,7 +69,7 @@ namespace PracticePlans.Common.Azure.Storage.Repositories
         {
             var entity = new PracticePlanEntity
             {
-                StartDate = practicePlan.StartDate.ToUniversalTime(),
+                StartDate = practicePlan.StartDate,
                 Details = practicePlan.Details,
                 PartitionKey = PracticePlanEntity.GetPartitionKey(),
                 RowKey = PracticePlanEntity.GetRowKey(practicePlan)

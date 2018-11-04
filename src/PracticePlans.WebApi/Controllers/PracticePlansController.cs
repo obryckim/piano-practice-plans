@@ -24,7 +24,7 @@ namespace PracticePlans.WebApi.Controllers
         [Route("{startDate:DateTime}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> DeleteAsync(DateTime startDate)
+        public async Task<ActionResult> DeleteAsync(DateTimeOffset startDate)
         {
             var practicePlan = await this.practicePlanRepository.GetAsync(startDate);
 
@@ -50,7 +50,7 @@ namespace PracticePlans.WebApi.Controllers
         [Route("{startDate:DateTime}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<IPracticePlan>> GetAsync(DateTime startDate)
+        public async Task<ActionResult<IPracticePlan>> GetAsync(DateTimeOffset startDate)
         {
             var practicePlan = await this.practicePlanRepository.GetAsync(startDate);
 
@@ -82,7 +82,7 @@ namespace PracticePlans.WebApi.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> PutAsync(DateTime startDate, PracticePlanDto practicePlan)
+        public async Task<ActionResult> PutAsync(DateTimeOffset startDate, PracticePlanDto practicePlan)
         {
             var practicePlanToUpdate = await this.practicePlanRepository.GetAsync(startDate);
 

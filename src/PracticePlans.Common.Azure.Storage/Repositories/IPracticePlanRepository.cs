@@ -11,7 +11,7 @@ namespace PracticePlans.Common.Azure.Storage.Repositories
 
         Task<IEnumerable<IPracticePlan>> GetAllAsync();
 
-        Task<IPracticePlan> GetAsync(DateTime startDate);
+        Task<IPracticePlan> GetAsync(DateTimeOffset startDate);
 
         Task<IPracticePlan> UpsertAsync(IPracticePlan practicePlan);
     }
