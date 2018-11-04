@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import marked from 'marked';
+import moment from 'moment';
 import PracticePlanForm from './PracticePlanForm.jsx';
 import * as practicePlanActions from '../../../actions/practicePlanActions';
 
@@ -53,8 +54,7 @@ class ManagePracticePlanPage extends React.Component {
     generateMarkdownPreview(event) {
         let markdown = event.target.value;
 
-        if(markdown === '')
-        {
+        if (markdown === '') {
             markdown = defaultMessage;
         }
 
@@ -67,6 +67,11 @@ class ManagePracticePlanPage extends React.Component {
 
         if (this.state.practicePlan.startDate.trim() === '') {
             errors.startDate = 'Please enter the start date for this practice plan.';
+            formIsValid = false;
+        }
+
+        if (!moment(this.state.practicePlan.startDate, ['M/D/YYYY', 'M/DD/YYYY', 'MM/D/YYYY', 'MM/DD/YYYY'], true).isValid()) {
+            errors.startDate = 'Please enter a valid start date for this practice plan.';
             formIsValid = false;
         }
 
@@ -88,14 +93,18 @@ class ManagePracticePlanPage extends React.Component {
     savePracticePlan(event) {
         event.preventDefault();
 
+        this.setState({ saving: true });
+
         if (!this.practicePlanFormIsValid()) {
+            this.setState({ saving: false });
             return;
         }
 
-        this.setState({ saving: true });
+        let practicePlanToSave = Object.assign({}, this.state.practicePlan);
+        practicePlanToSave.startDate = moment(practicePlanToSave.startDate);
 
         this.props.actions
-            .savePracticePlan(this.state.practicePlan)
+            .savePracticePlan(practicePlanToSave)
             .then(() => this.redirectAfterSave())
             .catch(error => {
                 let errorMessage = `An error occurred saving the practice plan: ${error.message || error}`;
