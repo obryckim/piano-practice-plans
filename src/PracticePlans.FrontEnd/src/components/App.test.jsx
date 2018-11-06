@@ -18,7 +18,6 @@ describe('<App />', () => {
         const wrapper = setup();
         let div = wrapper.find('div');
         expect(div.length).toBe(1);
-        expect(div.hasClass('container-fluid')).toBe(true);
     });
 });
 

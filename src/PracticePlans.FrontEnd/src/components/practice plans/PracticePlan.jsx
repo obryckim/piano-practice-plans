@@ -5,7 +5,6 @@ import moment from 'moment';
 const PracticePlan = ({ practicePlan }) => {
     return (
         <div>
-            <h1>Benjamin&apos;s Piano Practice Plan</h1>
             <h3>
                 <small className='text-muted'>
                     {moment(practicePlan.startDate).format('ddd, MMM D')}

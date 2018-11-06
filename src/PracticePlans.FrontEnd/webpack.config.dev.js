@@ -1,5 +1,7 @@
 ﻿import path from 'path';
 import Dotenv from 'dotenv-webpack';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+
 
 export default {
     mode: 'development',
@@ -18,7 +20,10 @@ export default {
     plugins: [
         new Dotenv({
             systemvars: true
-        })
+        }),
+        new CopyWebpackPlugin([{
+            from: 'public'
+        }])
     ],
     optimization: {
         noEmitOnErrors: true

@@ -36,8 +36,7 @@ class PracticePlansPage extends React.Component {
         const { practicePlans } = this.props;
 
         return (
-            <div>
-                <h1>Benjamin&apos;s Piano Practice Plans</h1>
+            <div className='container-fluid'>
                 <PracticePlanList practicePlans={practicePlans} />
                 <div>
                     <input type='submit' value='Home' className='btn btn-primary' onClick={this.redirectToHomePage} />&nbsp;
