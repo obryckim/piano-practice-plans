@@ -122,6 +122,7 @@ class ManagePracticePlanPage extends React.Component {
 
     render() {
         return (
+            this.props.isLoading === false &&
             <PracticePlanForm
                 onChange={this.updatePracticePlanState}
                 onSave={this.savePracticePlan}
@@ -141,7 +142,8 @@ ManagePracticePlanPage.propTypes = {
     practicePlan: PropTypes.object.isRequired,
     practicePlans: PropTypes.array.isRequired,
     markdownPreview: PropTypes.object.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired
 };
 
 const defaultMessage = '<h4>Enter some details to see the preview...</h4>';
@@ -180,7 +182,8 @@ function mapStateToProps(state, ownProps) {
         practicePlanId: practicePlanId,
         practicePlan: practicePlan,
         practicePlans: state.practicePlans,
-        markdownPreview: markdownPreview
+        markdownPreview: markdownPreview,
+        isLoading: state.ajaxCallsInProgress > 0
     };
 }
 

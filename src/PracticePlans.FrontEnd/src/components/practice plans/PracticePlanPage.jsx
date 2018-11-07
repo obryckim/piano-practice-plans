@@ -39,18 +39,8 @@ class PracticePlanPage extends React.Component {
 
     render() {
         return (
-            <div className='container'>
-                <div className='row'>
-                    <div className='col'>
-                        <PracticePlan practicePlan={this.props.practicePlan} />
-                    </div>
-                </div>
-                <div className='row pt-2'>
-                    <div className='col'>
-                        <input type='submit' value='View All Plans' className='btn btn-primary' onClick={this.redirectToPracticePlansPage} />
-                    </div>
-                </div>
-            </div>
+            this.props.isLoading === false &&
+            <PracticePlan practicePlan={this.props.practicePlan} />
         );
     }
 }
@@ -59,7 +49,8 @@ PracticePlanPage.propTypes = {
     history: PropTypes.object,
     actions: PropTypes.object.isRequired,
     practicePlanId: PropTypes.string,
-    practicePlan: PropTypes.object.isRequired
+    practicePlan: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired
 };
 
 function generateHtmlFromMarkdown(markdown) {
@@ -94,7 +85,8 @@ function mapStateToProps(state, ownProps) {
 
     return {
         practicePlanId: planId,
-        practicePlan: practicePlan
+        practicePlan: practicePlan,
+        isLoading: state.ajaxCallsInProgress > 0
     };
 }
 

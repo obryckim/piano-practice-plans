@@ -2,7 +2,7 @@
 import expect from 'expect';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import App from './App.jsx';
+import { App } from './App.jsx';
 
 Enzyme.configure({
     adapter: new Adapter()
@@ -10,7 +10,7 @@ Enzyme.configure({
 
 function setup() {
     const props = {};
-    return shallow(<App {...props} />);
+    return shallow(<App {...props} />).dive();
 }
 
 describe('<App />', () => {
@@ -18,7 +18,5 @@ describe('<App />', () => {
         const wrapper = setup();
         let div = wrapper.find('div');
         expect(div.length).toBe(1);
-        expect(div.hasClass('container-fluid')).toBe(true);
     });
 });
-
