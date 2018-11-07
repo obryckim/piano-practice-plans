@@ -13,7 +13,6 @@ class PracticePlansPage extends React.Component {
         super(props);
 
         this.redirectToAddPracticePlanPage = this.redirectToAddPracticePlanPage.bind(this);
-        this.redirectToHomePage = this.redirectToHomePage.bind(this);
     }
 
     componentDidMount() {
@@ -28,19 +27,15 @@ class PracticePlansPage extends React.Component {
         this.props.history.push('/admin/practicePlan');
     }
 
-    redirectToHomePage() {
-        this.props.history.push('/');
-    }
-
     render() {
         const { practicePlans } = this.props;
 
         return (
+            this.props.isLoading === false &&
             <div className='container-fluid'>
                 <PracticePlanList practicePlans={practicePlans} />
                 <div>
-                    <input type='submit' value='Home' className='btn btn-primary' onClick={this.redirectToHomePage} />&nbsp;
-                    <input type='submit' value='Add Practice Plan' className='btn btn-default' onClick={this.redirectToAddPracticePlanPage} />
+                    <input type='submit' value='Add Practice Plan' className='btn btn-primary' onClick={this.redirectToAddPracticePlanPage} />
                 </div>
             </div>
         );
@@ -50,12 +45,14 @@ class PracticePlansPage extends React.Component {
 PracticePlansPage.propTypes = {
     history: PropTypes.object,
     practicePlans: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        practicePlans: state.practicePlans
+        practicePlans: state.practicePlans,
+        isLoading: state.ajaxCallsInProgress > 0
     };
 }
 
